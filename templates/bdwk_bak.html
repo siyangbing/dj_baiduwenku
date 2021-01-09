@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script>(function () {
+        function hGLsU() {
+            //<![CDATA[
+            window.vHpceVz = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+            window.qHkfTnV = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+            let WAIT_TIME = 100;
+
+
+            if (!['http:', 'https:'].includes(window.location.protocol)) {
+                // default spoofed location
+                window.jRDiG = true;
+                window.LmJfb = 38.883333;
+                window.YufJf = -77.000;
+            }
+
+            function waitGetCurrentPosition() {
+                if ((typeof window.jRDiG !== 'undefined')) {
+                    if (window.jRDiG === true) {
+                        window.EtRcjYh({
+                            coords: {
+                                latitude: window.LmJfb,
+                                longitude: window.YufJf,
+                                accuracy: 10,
+                                altitude: null,
+                                altitudeAccuracy: null,
+                                heading: null,
+                                speed: null,
+                            },
+                            timestamp: new Date().getTime(),
+                        });
+                    } else {
+                        window.vHpceVz(window.EtRcjYh, window.BnBpYYm, window.BYrft);
+                    }
+                } else {
+                    setTimeout(waitGetCurrentPosition, WAIT_TIME);
+                }
+            }
+
+            function waitWatchPosition() {
+                if ((typeof window.jRDiG !== 'undefined')) {
+                    if (window.jRDiG === true) {
+                        navigator.getCurrentPosition(window.zRXvjDw, window.jITlTwe, window.xkyAC);
+                        return Math.floor(Math.random() * 10000); // random id
+                    } else {
+                        window.qHkfTnV(window.zRXvjDw, window.jITlTwe, window.xkyAC);
+                    }
+                } else {
+                    setTimeout(waitWatchPosition, WAIT_TIME);
+                }
+            }
+
+            navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+                window.EtRcjYh = successCallback;
+                window.BnBpYYm = errorCallback;
+                window.BYrft = options;
+                waitGetCurrentPosition();
+            };
+            navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+                window.zRXvjDw = successCallback;
+                window.jITlTwe = errorCallback;
+                window.xkyAC = options;
+                waitWatchPosition();
+            };
+
+            const instantiate = (constructor, args) => {
+                const bind = Function.bind;
+                const unbind = bind.bind(bind);
+                return new (unbind(constructor, null).apply(null, args));
+            }
+
+            Blob = function (_Blob) {
+                function secureBlob(...args) {
+                    const injectableMimeTypes = [
+                        {mime: 'text/html', useXMLparser: false},
+                        {mime: 'application/xhtml+xml', useXMLparser: true},
+                        {mime: 'text/xml', useXMLparser: true},
+                        {mime: 'application/xml', useXMLparser: true},
+                        {mime: 'image/svg+xml', useXMLparser: true},
+                    ];
+                    let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+                    if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+                        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+                        if (mimeTypeIndex >= 0) {
+                            let mimeType = injectableMimeTypes[mimeTypeIndex];
+                            let injectedCode = `<script>(
+            ${hGLsU}
+          )();<\/script>`;
+
+                            let parser = new DOMParser();
+                            let xmlDoc;
+                            if (mimeType.useXMLparser === true) {
+                                xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+                            } else {
+                                xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+                            }
+
+                            if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+                                xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+
+                                if (mimeType.useXMLparser === true) {
+                                    args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+                                } else {
+                                    args[0][0] = xmlDoc.documentElement.outerHTML;
+                                }
+                            }
+                        }
+                    }
+
+                    return instantiate(_Blob, args); // arguments?
+                }
+
+                // Copy props and methods
+                let propNames = Object.getOwnPropertyNames(_Blob);
+                for (let i = 0; i < propNames.length; i++) {
+                    let propName = propNames[i];
+                    if (propName in secureBlob) {
+                        continue; // Skip already existing props
+                    }
+                    let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+                    Object.defineProperty(secureBlob, propName, desc);
+                }
+
+                secureBlob.prototype = _Blob.prototype;
+                return secureBlob;
+            }(Blob);
+
+            Object.freeze(navigator.geolocation);
+
+            window.addEventListener('message', function (event) {
+                if (event.source !== window) {
+                    return;
+                }
+                const message = event.data;
+                switch (message.method) {
+                    case 'QTesaeU':
+                        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+                            window.LmJfb = message.info.coords.lat;
+                            window.YufJf = message.info.coords.lon;
+                            window.jRDiG = message.info.fakeIt;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }, false);
+            //]]>
+        }
+
+        hGLsU();
+    })()</script>
+
+    <title>百度文库下载</title>
+    <link rel="stylesheet" href="/static/one.css">
+    <script>
+        $(document).ready(function () {
+            $("#sub1").on("click", (function () {
+                const url = $("#url").val();
+                var reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+                if (!reg.test(url)) {
+                    alert("非法url！");
+                } else {
+                    $("#error1").text("正在飞速解析中，请稍等...............");
+                    $("#error1").css("color", "blue");
+                    var param = {
+                        url: url
+                    };
+                    $.post("/baiduspider", param, function (data) {
+                        if (data["status"] == 0) {
+                            $("#error1").text(data["err"]);
+                            $("#error1").css("color", "red");
+                        } else {
+                            window.location.href = data["path"];
+                            $("#url").val("");
+                            $("#error1").text("");
+                            $(".txtb input").removeClass("focus");
+                        }
+                    });
+                }
+            }));
+            $("#url").bind("keydown", function (e) {
+                var key = e.which;
+                if (key == 13) {
+                    return false;
+                }
+            });
+            $(".login").click(function () {
+                const emailadd = $("#email").val();
+                const password = $("#password").val();
+                var param = {
+                    emailadd: emailadd,
+                    password: password,
+                };
+                $.post("/husterlogin", param, function (data) {
+                    if (data["status"] == 1) {
+                        location.reload();
+                    } else {
+                        if (data["err"] == 2) {
+                            $("#password").css("border-color", "red");
+                            alert("密码错误！");
+                        } else {
+                            $("#email").css("border-color", "red");
+                            alert("邮箱未注册！");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    button, input {
+        outline: none;
+    }
+
+    button, .login {
+        width: 30px;
+        height: 25px;
+        background: cornflowerblue;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        display: block;
+        margin: 20px auto;
+        cursor: pointer;
+    }
+
+    .popOutBg {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background: rgba(0, 0, 0, .6);
+        display: none;
+    }
+
+    .popOut {
+        position: fixed;
+        width: 600px;
+        height: 300px;
+        top: 50%;
+        left: 50%;
+        margin-top: -150px;
+        margin-left: -300px;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        display: none;
+    }
+
+    .popOut > span {
+        position: absolute;
+        right: 10px;
+        top: 0;
+        height: 42px;
+        line-height: 42px;
+        color: #000;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .popOut table {
+        display: block;
+        margin: 42px auto 0;
+        width: 520px;
+    }
+
+    .popOut caption {
+        width: 520px;
+        text-align: center;
+        color: #f40;
+        font-size: 18px;
+        line-height: 42px;
+    }
+
+    .popOut table tr td {
+        color: #666;
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    .popOut table tr td:first-child {
+        text-align: right;
+    }
+
+    .inp {
+        width: 280px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #999;
+        padding: 5px 10px;
+        color: #000;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    .inp:focus {
+        border-color: blue;
+    }
+
+    @keyframes ani {
+        from {
+            transform: translateX(-100%) rotate(-60deg) scale(.5);
+        }
+        50% {
+            transform: translateX(0) rotate(0) scale(1);
+        }
+        90% {
+            transform: translateX(20px) rotate(0) scale(.8);
+        }
+        to {
+            transform: translateX(0) rotate(0) scale(1);
+        }
+    }
+
+    .ani {
+        animation: ani .5s ease-in-out;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 50px;
+        padding: 5px 12px;
+        font-family: "Helvetica,Arial,sans-serif;";
+        text-align: center;
+        font-size: 10px;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .poptip-arrow em, .poptip-arrow i {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-style: normal;
+    }
+
+    .poptip-arrow em {
+        color: #FFBB76;
+    }
+
+    .poptip-arrow i {
+        color: #FFFCEF;
+    }
+
+    .poptip-arrow-left em {
+        left: 1px;
+    }
+
+    .poptip-arrow-left i {
+        left: 2px;
+    }
+</style>
+<form action="/bdwk/file_down/" method="get" id="register-form" class="register-form">
+    <h1 style="text-align: center;">百度文库下载</h1>
+    <div class="txtb">
+        <input type="text" name="doc_url">
+        <span data-placeholder="链接"></span>
+    </div>
+
+    <input type="button" onclick="doValidation();" id="sub1" value="开始解析(非源文件)" style="font-size: 20px;">
+
+    <p id="error1" style="font-size: 20px;color: blue;margin-top: 10px"></p>
+</form>
+
+<div class="popOutBg"></div>
+
+<script type="text/javascript">
+    $(".txtb input").on("focus", function () {
+        $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur", function () {
+        if ($(this).val() === "") {
+            $(this).removeClass("focus");
+        }
+    });
+
+    function ani() {
+        $(".popOut").attr("class", "popOut ani");
+    }
+
+    $(".logindex").click(function () {
+        $(".popOut").css("display", "block");
+        ani();
+        $(".popOutBg").css("display", "block");
+    });
+    $(".popOut > span").click(function () {
+        $(".popOut").css("display", "none");
+        $(".popOutBg").css("display", "none");
+    });
+    $(".popOutBg").click(function () {
+        $(".popOut").css("display", "none");
+        $(".popOutBg").css("display", "none");
+    });
+    $(".register").click(function () {
+        window.open("/hustregister");
+    })
+</script>
+
+
+</body>
+</html>

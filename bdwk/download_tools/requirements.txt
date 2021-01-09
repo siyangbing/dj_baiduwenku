@@ -1,0 +1,7 @@
+requests
+my_fake_useragent
+python-docx
+opencv-python
+python-pptx
+selenium
+scrapy
